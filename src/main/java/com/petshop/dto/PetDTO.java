@@ -1,9 +1,12 @@
 package com.petshop.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,6 +14,8 @@ import lombok.Setter;
 @Setter
 public class PetDTO {
 
+    @JsonIgnore
+    private UUID id;
     private String name;
     private String gender;
     private float weight;
