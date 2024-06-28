@@ -34,8 +34,9 @@ public class PetResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<Pet>> findAll() {
-        return ResponseEntity.ok().body(petService.findAll());
+    public ResponseEntity<List<PetDTO>> findAll() {
+        return ResponseEntity.ok().body(petService.findAll().stream()
+                .map(p -> modelMapper.map(p, PetDTO.class)).toList());
     }
 
     @PostMapping
