@@ -11,4 +11,6 @@ public interface PetService {
     Pet findById(UUID id);
 
     List<Pet> findAll();
+
+    Pet save(Pet pet);
 }
