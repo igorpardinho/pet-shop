@@ -40,9 +40,9 @@ public class PetResource {
     }
 
     @PostMapping
-    public ResponseEntity<PetDTO> save(@RequestBody Pet pet) {
+    public ResponseEntity<Pet> create(@RequestBody PetDTO petDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(modelMapper.map(petService.save(pet), PetDTO.class));
+                .body(petService.create(modelMapper.map(petDTO,Pet.class)));
     }
 
 }

@@ -1,6 +1,7 @@
 package com.petshop.services;
 
 import com.petshop.domain.Pet;
+import com.petshop.dto.PetDTO;
 
 
 import java.util.List;
@@ -12,5 +13,5 @@ public interface PetService {
 
     List<Pet> findAll();
 
-    Pet save(Pet pet);
+    Pet create(Pet pet);
 }

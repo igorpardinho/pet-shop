@@ -14,8 +14,10 @@ public class PetServiceImpl implements PetService {
 
     private final PetRepository petRepository;
 
+
     public PetServiceImpl(PetRepository petRepository) {
         this.petRepository = petRepository;
+
     }
 
 
@@ -32,7 +34,7 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public Pet save(Pet pet) {
+    public Pet create(Pet pet) {
         return petRepository.save(pet);
     }
 }
