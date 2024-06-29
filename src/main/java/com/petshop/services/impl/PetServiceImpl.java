@@ -3,6 +3,8 @@ package com.petshop.services.impl;
 import com.petshop.domain.Pet;
 import com.petshop.repositories.PetRepository;
 import com.petshop.services.PetService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,5 +38,10 @@ public class PetServiceImpl implements PetService {
     @Override
     public Pet create(Pet pet) {
         return petRepository.save(pet);
+    }
+
+    @Override
+    public void delete(UUID id) {
+        petRepository.deleteById(id);
     }
 }

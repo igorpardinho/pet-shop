@@ -17,6 +17,7 @@ import java.util.UUID;
 @RequestMapping("/pets")
 public class PetResource {
 
+    public static final String ID = "/{id}";
     private final PetServiceImpl petService;
     private final ModelMapper modelMapper;
 
@@ -27,7 +28,7 @@ public class PetResource {
     }
 
 
-    @GetMapping("{id}")
+    @GetMapping(ID)
     public ResponseEntity<PetDTO> findById(@PathVariable(name = "id") UUID id) {
 
         return ResponseEntity.ok().body(modelMapper.map(petService.findById(id), PetDTO.class));
@@ -43,6 +44,12 @@ public class PetResource {
     public ResponseEntity<Pet> create(@RequestBody PetDTO petDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(petService.create(modelMapper.map(petDTO,Pet.class)));
+    }
+
+    @DeleteMapping(ID)
+    public ResponseEntity<PetDTO> delete(@PathVariable(value = "id") UUID id){
+        petService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -14,7 +14,7 @@ import java.util.UUID;
 @Setter
 public class PetDTO {
 
-    @JsonIgnore
+
     private UUID id;
     private String name;
     private String gender;

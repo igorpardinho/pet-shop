@@ -14,4 +14,6 @@ public interface PetService {
     List<Pet> findAll();
 
     Pet create(Pet pet);
+
+    void delete(UUID id);
 }
