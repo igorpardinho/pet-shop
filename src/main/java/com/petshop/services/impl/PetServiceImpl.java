@@ -3,8 +3,7 @@ package com.petshop.services.impl;
 import com.petshop.domain.Pet;
 import com.petshop.repositories.PetRepository;
 import com.petshop.services.PetService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.petshop.services.exceptions.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +26,7 @@ public class PetServiceImpl implements PetService {
     public Pet findById(UUID id) {
         Optional<Pet> optionalPet = petRepository.findById(id);
 
-        return optionalPet.orElse(null);
+        return optionalPet.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
 
     @Override
@@ -43,5 +42,11 @@ public class PetServiceImpl implements PetService {
     @Override
     public void delete(UUID id) {
         petRepository.deleteById(id);
+    }
+
+    @Override
+    public Pet update(Pet pet) {
+       return petRepository.save(pet);
+
     }
 }

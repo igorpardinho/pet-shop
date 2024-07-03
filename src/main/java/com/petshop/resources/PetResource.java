@@ -29,7 +29,7 @@ public class PetResource {
 
 
     @GetMapping(ID)
-    public ResponseEntity<PetDTO> findById(@PathVariable(name = "id") UUID id) {
+    public ResponseEntity<PetDTO> findById(@PathVariable(value = "id") UUID id) {
 
         return ResponseEntity.ok().body(modelMapper.map(petService.findById(id), PetDTO.class));
     }
@@ -43,11 +43,19 @@ public class PetResource {
     @PostMapping
     public ResponseEntity<Pet> create(@RequestBody PetDTO petDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(petService.create(modelMapper.map(petDTO,Pet.class)));
+                .body(petService.create(modelMapper.map(petDTO, Pet.class)));
+    }
+
+    @PutMapping(ID)
+    public ResponseEntity<Object> update(@PathVariable(value = "id") UUID id, @RequestBody PetDTO petDTO) {
+        petDTO.setId(id);
+        Pet pet = petService.update(modelMapper.map(petDTO, Pet.class));
+        return ResponseEntity.status(HttpStatus.OK).body(pet);
+
     }
 
     @DeleteMapping(ID)
-    public ResponseEntity<PetDTO> delete(@PathVariable(value = "id") UUID id){
+    public ResponseEntity<PetDTO> delete(@PathVariable(value = "id") UUID id) {
         petService.delete(id);
         return ResponseEntity.noContent().build();
     }

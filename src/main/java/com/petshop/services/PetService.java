@@ -1,10 +1,11 @@
 package com.petshop.services;
 
 import com.petshop.domain.Pet;
-import com.petshop.dto.PetDTO;
+
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface PetService {
@@ -16,4 +17,6 @@ public interface PetService {
     Pet create(Pet pet);
 
     void delete(UUID id);
+
+    Pet update(Pet pet);
 }
