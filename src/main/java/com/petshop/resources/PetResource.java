@@ -47,7 +47,7 @@ public class PetResource {
     }
 
     @PutMapping(ID)
-    public ResponseEntity<Object> update(@PathVariable(value = "id") UUID id, @RequestBody PetDTO petDTO) {
+    public ResponseEntity<Pet> update(@PathVariable(value = "id") UUID id, @RequestBody PetDTO petDTO) {
         petDTO.setId(id);
         Pet pet = petService.update(modelMapper.map(petDTO, Pet.class));
         return ResponseEntity.status(HttpStatus.OK).body(pet);
