@@ -4,6 +4,7 @@ package com.petshop.resources;
 import com.petshop.domain.Pet;
 import com.petshop.dto.PetDTO;
 import com.petshop.services.impl.PetServiceImpl;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,13 +42,13 @@ public class PetResource {
     }
 
     @PostMapping
-    public ResponseEntity<Pet> create(@RequestBody PetDTO petDTO) {
+    public ResponseEntity<Pet> create(@RequestBody @Valid PetDTO petDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(petService.create(modelMapper.map(petDTO, Pet.class)));
     }
 
     @PutMapping(ID)
-    public ResponseEntity<Pet> update(@PathVariable(value = "id") UUID id, @RequestBody PetDTO petDTO) {
+    public ResponseEntity<Pet> update(@PathVariable(value = "id") UUID id, @RequestBody @Valid PetDTO petDTO) {
         petDTO.setId(id);
         Pet pet = petService.update(modelMapper.map(petDTO, Pet.class));
         return ResponseEntity.status(HttpStatus.OK).body(pet);
