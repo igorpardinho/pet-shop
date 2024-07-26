@@ -1,14 +1,13 @@
 package com.petshop.resources;
 
 
+import com.petshop.domain.Tutor;
 import com.petshop.dto.TutorDTO;
 import com.petshop.services.impl.TutorServiceImpl;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,5 +34,10 @@ public class TutorResource {
     public ResponseEntity<List<TutorDTO>> findAll() {
         return ResponseEntity.ok().body(tutorService.findAll().stream().map(t -> modelMapper.map(t, TutorDTO.class))
                 .toList());
+    }
+
+    @PostMapping
+    public ResponseEntity<Tutor> save(@RequestBody TutorDTO tutorDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(tutorService.save(modelMapper.map(tutorDTO, Tutor.class)));
     }
 }

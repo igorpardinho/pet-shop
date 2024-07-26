@@ -1,6 +1,7 @@
 package com.petshop.services.impl;
 
 import com.petshop.domain.Tutor;
+import com.petshop.dto.TutorDTO;
 import com.petshop.repositories.TutorRepository;
 import com.petshop.services.TutorService;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,11 @@ public class TutorServiceImpl implements TutorService {
     @Override
     public List<Tutor> findAll() {
         return tutorRepository.findAll();
+    }
+
+    @Override
+    public Tutor save(Tutor tutor) {
+        return tutorRepository.save(tutor);
     }
 
 
