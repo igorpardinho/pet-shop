@@ -2,6 +2,8 @@ package com.petshop.dto;
 
 
 import com.petshop.domain.Tutor;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,9 +19,13 @@ public class PetDTO {
 
 
     private UUID id;
-    private String name;
+    @NotBlank
+    private String  name;
+    @NotBlank
     private String gender;
+    @NotNull
     private float weight;
+
     private Tutor tutor;
 
 }
