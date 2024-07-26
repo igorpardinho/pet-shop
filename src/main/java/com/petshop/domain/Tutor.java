@@ -1,11 +1,14 @@
 package com.petshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
 
@@ -14,7 +17,11 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Tutor {
+public class Tutor implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -23,6 +30,7 @@ public class Tutor {
 
     private String address;
 
-    @OneToMany
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(mappedBy = "tutor")
     private Set<Pet> pets;
 }
