@@ -26,8 +26,8 @@ public class LocalConfig {
 
     @Bean
     public List<Pet> startdb(){
-        Pet pet1 = new Pet(null,"pipi","female",10,null);
-        Pet pet2 = new Pet(null,"nega","female",15.60f,null);
+        Pet pet1 = new Pet(null,"pipi","female",10);
+        Pet pet2 = new Pet(null,"nega","female",15.60f);
 
        return petRepository.saveAll(List.of(pet1,pet2));
     }
