@@ -40,17 +40,17 @@ public class TutorResource {
 
     @PostMapping
     public ResponseEntity<Tutor> save(@RequestBody @Valid TutorDTO tutorDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(tutorService.save(modelMapper.map(tutorDTO, Tutor.class)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(tutorService.save(tutorDTO));
     }
 
     @PutMapping(ID)
     public ResponseEntity<Tutor> update(@PathVariable(value = "id") UUID id, @RequestBody @Valid TutorDTO tutorDTO) {
         tutorDTO.setId(id);
-        return ResponseEntity.ok().body(tutorService.update(id,modelMapper.map(tutorDTO,Tutor.class)));
+        return ResponseEntity.ok().body(tutorService.update(tutorDTO));
     }
 
     @DeleteMapping(ID)
-    public ResponseEntity<Tutor> delete(@PathVariable(value = "id") UUID id){
+    public ResponseEntity<Tutor> delete(@PathVariable(value = "id") UUID id) {
         tutorService.delete(id);
         return ResponseEntity.noContent().build();
     }

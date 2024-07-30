@@ -1,6 +1,7 @@
 package com.petshop.services;
 
 import com.petshop.domain.Tutor;
+import com.petshop.dto.TutorDTO;
 
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface TutorService {
 
     Tutor findById(UUID id);
     List<Tutor> findAll();
-    Tutor save(Tutor tutor);
-    Tutor update(UUID id,Tutor tutor);
+    Tutor save(TutorDTO tutorDTO);
+    Tutor update(TutorDTO tutorDTO);
     void delete(UUID id);
 }

@@ -42,15 +42,15 @@ public class PetResource {
     }
 
     @PostMapping
-    public ResponseEntity<Pet> create(@RequestBody @Valid PetDTO petDTO) {
+    public ResponseEntity<Pet> save(@RequestBody @Valid PetDTO petDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(petService.save(modelMapper.map(petDTO, Pet.class)));
+                .body(petService.save(petDTO));
     }
 
     @PutMapping(ID)
     public ResponseEntity<Pet> update(@PathVariable(value = "id") UUID id, @RequestBody @Valid PetDTO petDTO) {
         petDTO.setId(id);
-        Pet pet = petService.update(modelMapper.map(petDTO, Pet.class));
+        Pet pet = petService.update(petDTO);
         return ResponseEntity.status(HttpStatus.OK).body(pet);
 
     }

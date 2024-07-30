@@ -1,9 +1,11 @@
 package com.petshop.services.impl;
 
 import com.petshop.domain.Tutor;
+import com.petshop.dto.TutorDTO;
 import com.petshop.repositories.TutorRepository;
 import com.petshop.services.TutorService;
 import com.petshop.services.exceptions.ObjectNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,10 +16,11 @@ import java.util.UUID;
 public class TutorServiceImpl implements TutorService {
 
     private final TutorRepository tutorRepository;
+    private final ModelMapper modelMapper;
 
-
-    public TutorServiceImpl(TutorRepository tutorRepository) {
+    public TutorServiceImpl(TutorRepository tutorRepository, ModelMapper modelMapper) {
         this.tutorRepository = tutorRepository;
+        this.modelMapper = modelMapper;
     }
 
 
@@ -35,14 +38,14 @@ public class TutorServiceImpl implements TutorService {
     }
 
     @Override
-    public Tutor save(Tutor tutor) {
-        return tutorRepository.save(tutor);
+    public Tutor save(TutorDTO tutorDTO) {
+        return tutorRepository.save(modelMapper.map(tutorDTO, Tutor.class));
     }
 
     @Override
-    public Tutor update(UUID id, Tutor tutor) {
-        findById(id);
-        return tutorRepository.save(tutor);
+    public Tutor update(TutorDTO tutorDTO) {
+        findById(tutorDTO.getId());
+        return tutorRepository.save(modelMapper.map(tutorDTO, Tutor.class));
     }
 
     @Override
