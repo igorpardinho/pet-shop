@@ -44,7 +44,7 @@ public class PetResource {
     @PostMapping
     public ResponseEntity<Pet> create(@RequestBody @Valid PetDTO petDTO) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(petService.create(modelMapper.map(petDTO, Pet.class)));
+                .body(petService.save(modelMapper.map(petDTO, Pet.class)));
     }
 
     @PutMapping(ID)

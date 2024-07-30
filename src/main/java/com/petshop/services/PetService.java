@@ -13,7 +13,7 @@ public interface PetService {
 
     List<Pet> findAll();
 
-    Pet create(Pet pet);
+    Pet save(Pet pet);
 
     void delete(UUID id);
 
