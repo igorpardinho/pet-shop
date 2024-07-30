@@ -11,4 +11,6 @@ public interface TutorService {
     Tutor findById(UUID id);
     List<Tutor> findAll();
     Tutor save(Tutor tutor);
+    Tutor update(UUID id,Tutor tutor);
+    void delete(UUID id);
 }
