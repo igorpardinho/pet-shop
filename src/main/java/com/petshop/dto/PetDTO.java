@@ -1,7 +1,7 @@
 package com.petshop.dto;
 
 
-import com.petshop.domain.Tutor;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -26,6 +26,5 @@ public class PetDTO {
     @NotNull
     private float weight;
 
-    private Tutor tutor;
 
 }

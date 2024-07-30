@@ -31,7 +31,4 @@ public class Pet implements Serializable {
     private float weight;
 
 
-    @ManyToOne
-    @JoinColumn(name = "tutor_id")
-    private Tutor tutor;
 }

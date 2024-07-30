@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
 
-@Entity
+@Entity(name = "TB_TUTOR")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -31,6 +31,6 @@ public class Tutor implements Serializable {
     private String address;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "tutor")
+    @OneToMany()
     private Set<Pet> pets;
 }
