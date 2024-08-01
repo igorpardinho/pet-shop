@@ -92,12 +92,12 @@ class PetServiceImplTest {
     @Test
     void whenSaveThenReturnSuccess() {
         when(petRepository.save(any())).thenReturn(pet);
-        when(modelMapper.map(any(),any())).thenReturn(pet);
+
 
         Pet response = petService.save(petDTO);
 
         assertNotNull(response);
-        assertEquals(Pet.class,response.getClass());
+        assertEquals(Pet.class, response.getClass());
         assertEquals(ID, response.getId());
         assertEquals(NAME, response.getName());
         assertEquals(GENDER, response.getGender());
@@ -129,16 +129,16 @@ class PetServiceImplTest {
     @Test
     void whenUpdateThenReturnSuccess() {
         when(petRepository.save(any())).thenReturn(pet);
-        when(modelMapper.map(any(),any())).thenReturn(pet);
+
 
         Pet response = petService.update(petDTO);
 
         assertNotNull(response);
-        assertEquals(Pet.class,response.getClass());
-        assertEquals(ID,response.getId());
-        assertEquals(NAME,response.getName());
-        assertEquals(GENDER,response.getGender());
-        assertEquals(WEIGHT,response.getWeight());
+        assertEquals(Pet.class, response.getClass());
+        assertEquals(ID, response.getId());
+        assertEquals(NAME, response.getName());
+        assertEquals(GENDER, response.getGender());
+        assertEquals(WEIGHT, response.getWeight());
     }
 
     public void start() {
