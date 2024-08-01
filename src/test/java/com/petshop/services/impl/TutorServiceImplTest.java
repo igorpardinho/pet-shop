@@ -48,22 +48,23 @@ class TutorServiceImplTest {
         Tutor response = tutorService.findById(ID);
 
         assertNotNull(response);
-        assertEquals(Tutor.class,response.getClass());
-        assertEquals(ID,response.getId());
-        assertEquals(NAME,response.getName());
-        assertEquals(ADDRESS,response.getAddress());
-        assertEquals(PETS,response.getPets());
+        assertEquals(Tutor.class, response.getClass());
+        assertEquals(ID, response.getId());
+        assertEquals(NAME, response.getName());
+        assertEquals(ADDRESS, response.getAddress());
+        assertEquals(PETS, response.getPets());
     }
+
     @Test
-    void whenFindByIdReturnObjectNotFoundException(){
+    void whenFindByIdReturnObjectNotFoundException() {
         when(tutorRepository.findById(any(UUID.class))).thenThrow(new ObjectNotFoundException("Objeto não encontrado"));
 
         try {
             tutorService.findById(ID);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             assertNotNull(ex);
-            assertEquals(ObjectNotFoundException.class,ex.getClass());
-            assertEquals("Objeto não encontrado",ex.getMessage());
+            assertEquals(ObjectNotFoundException.class, ex.getClass());
+            assertEquals("Objeto não encontrado", ex.getMessage());
         }
     }
 
@@ -74,20 +75,43 @@ class TutorServiceImplTest {
         List<Tutor> response = tutorService.findAll();
 
         assertNotNull(response);
-        assertEquals(Tutor.class,response.getFirst().getClass());
-        assertEquals(ID,response.getFirst().getId());
-        assertEquals(NAME,response.getFirst().getName());
-        assertEquals(ADDRESS,response.getFirst().getAddress());
-        assertEquals(PETS,response.getFirst().getPets());
+        assertEquals(Tutor.class, response.getFirst().getClass());
+        assertEquals(ID, response.getFirst().getId());
+        assertEquals(NAME, response.getFirst().getName());
+        assertEquals(ADDRESS, response.getFirst().getAddress());
+        assertEquals(PETS, response.getFirst().getPets());
 
     }
 
     @Test
-    void save() {
+    void whenSaveThenReturnSuccess() {
+        when(tutorRepository.save(any())).thenReturn(tutor);
+
+
+        Tutor response = tutorService.save(tutorDTO);
+
+        assertNotNull(response);
+        assertEquals(Tutor.class, response.getClass());
+        assertEquals(ID, response.getId());
+        assertEquals(NAME, response.getName());
+        assertEquals(ADDRESS, response.getAddress());
+        assertEquals(PETS, response.getPets());
+
     }
 
     @Test
-    void update() {
+    void whenUpdateThenReturnSuccess() {
+        when(tutorRepository.save(any())).thenReturn(tutor);
+        when(tutorRepository.findById(any())).thenReturn(optionalTutor);
+
+        Tutor response = tutorService.update(tutorDTO);
+
+        assertNotNull(response);
+        assertEquals(Tutor.class, response.getClass());
+        assertEquals(ID, response.getId());
+        assertEquals(NAME, response.getName());
+        assertEquals(ADDRESS, response.getAddress());
+        assertEquals(PETS, response.getPets());
     }
 
     @Test
