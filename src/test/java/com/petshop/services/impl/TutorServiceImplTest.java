@@ -87,7 +87,6 @@ class TutorServiceImplTest {
     void whenSaveThenReturnSuccess() {
         when(tutorRepository.save(any())).thenReturn(tutor);
 
-
         Tutor response = tutorService.save(tutorDTO);
 
         assertNotNull(response);
@@ -115,7 +114,26 @@ class TutorServiceImplTest {
     }
 
     @Test
-    void delete() {
+    void whenDeleteThenReturnSuccess() {
+        when(tutorRepository.findById(any(UUID.class))).thenReturn(optionalTutor);
+        doNothing().when(tutorRepository).deleteById(any(UUID.class));
+        tutorService.delete(ID);
+        verify(tutorRepository, times(1)).deleteById(any(UUID.class));
+
+    }
+
+    @Test
+    void whenDeleteThenReturnObjectNotFoundException() {
+        when(tutorRepository.findById(any(UUID.class))).thenThrow(new ObjectNotFoundException("Objeto não encontrado"));
+        doNothing().when(tutorRepository).deleteById(any(UUID.class));
+
+        try {
+            tutorService.delete(ID);
+        } catch (Exception ex) {
+            assertNotNull(ex);
+            assertEquals(ObjectNotFoundException.class, ex.getClass());
+            assertEquals("Objeto não encontrado", ex.getMessage());
+        }
     }
 
     private void startTutor() {
