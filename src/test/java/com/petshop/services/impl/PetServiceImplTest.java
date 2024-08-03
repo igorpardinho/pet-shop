@@ -43,7 +43,7 @@ class PetServiceImplTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(PetServiceImplTest.class);
-        start();
+        startPet();
     }
 
     @Test
@@ -141,7 +141,7 @@ class PetServiceImplTest {
         assertEquals(WEIGHT, response.getWeight());
     }
 
-    public void start() {
+    public void startPet() {
         pet = new Pet(ID, NAME, GENDER, WEIGHT);
         petDTO = new PetDTO(ID, NAME, GENDER, WEIGHT);
         optionalPet = Optional.of(new Pet(ID, NAME, GENDER, WEIGHT));
