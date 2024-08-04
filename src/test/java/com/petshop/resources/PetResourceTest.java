@@ -5,6 +5,7 @@ import com.petshop.dto.PetDTO;
 import com.petshop.repositories.PetRepository;
 import com.petshop.services.exceptions.ObjectNotFoundException;
 import com.petshop.services.impl.PetServiceImpl;
+import org.apache.coyote.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -92,7 +93,15 @@ class PetResourceTest {
     }
 
     @Test
-    void save() {
+    void whenSaveThenReturnSuccess() {
+        when(petService.save(any())).thenReturn(pet);
+
+        ResponseEntity<Pet> response = petResource.save(petDTO);
+
+        assertNotNull(response);
+        assertEquals(ResponseEntity.class,response.getClass());
+        assertEquals(Pet.class, Objects.requireNonNull(response.getBody()).getClass());
+        assertEquals(HttpStatusCode.valueOf(201),response.getStatusCode());
     }
 
     @Test
