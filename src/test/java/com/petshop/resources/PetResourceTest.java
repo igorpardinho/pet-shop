@@ -5,14 +5,13 @@ import com.petshop.dto.PetDTO;
 import com.petshop.repositories.PetRepository;
 import com.petshop.services.exceptions.ObjectNotFoundException;
 import com.petshop.services.impl.PetServiceImpl;
-import org.apache.coyote.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -38,8 +37,6 @@ class PetResourceTest {
     private ModelMapper modelMapper;
     @Mock
     private PetServiceImpl petService;
-    @Mock
-    private PetRepository petRepository;
 
     private PetDTO petDTO;
     private Pet pet;
@@ -62,7 +59,7 @@ class PetResourceTest {
         assertNotNull(response);
         assertEquals(PetDTO.class, Objects.requireNonNull(response.getBody()).getClass());
         assertEquals(ResponseEntity.class, response.getClass());
-        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
@@ -88,7 +85,7 @@ class PetResourceTest {
         assertNotNull(response);
         assertEquals(ResponseEntity.class, response.getClass());
         assertEquals(PetDTO.class, Objects.requireNonNull(response.getBody()).getFirst().getClass());
-        assertEquals(HttpStatusCode.valueOf(200), response.getStatusCode());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
 
     }
 
@@ -99,17 +96,34 @@ class PetResourceTest {
         ResponseEntity<Pet> response = petResource.save(petDTO);
 
         assertNotNull(response);
-        assertEquals(ResponseEntity.class,response.getClass());
+        assertEquals(ResponseEntity.class, response.getClass());
         assertEquals(Pet.class, Objects.requireNonNull(response.getBody()).getClass());
-        assertEquals(HttpStatusCode.valueOf(201),response.getStatusCode());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 
     @Test
-    void update() {
+    void whenUpdateThenReturnSuccess() {
+        when(petService.update(any())).thenReturn(pet);
+
+
+        ResponseEntity<Pet> response = petResource.update(ID, petDTO);
+
+        assertNotNull(response);
+        assertEquals(ResponseEntity.class, response.getClass());
+        assertEquals(Pet.class, Objects.requireNonNull(response.getBody()).getClass());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
-    void delete() {
+    void whenDeleteThenReturnSuccess() {
+        doNothing().when(petService).delete(any(UUID.class));
+
+        ResponseEntity<PetDTO> response = petResource.delete(ID);
+
+        verify(petService, times(1)).delete(any(UUID.class));
+
+        assertNotNull(response);
+        assertEquals(HttpStatus.NO_CONTENT,response.getStatusCode());
     }
 
     public void startdb() {
