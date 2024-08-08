@@ -2,7 +2,6 @@ package com.petshop.resources;
 
 import com.petshop.domain.Pet;
 import com.petshop.dto.PetDTO;
-import com.petshop.repositories.PetRepository;
 import com.petshop.services.exceptions.ObjectNotFoundException;
 import com.petshop.services.impl.PetServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,7 +38,7 @@ class PetResourceTest {
 
     private PetDTO petDTO;
     private Pet pet;
-    Optional<Pet> optionalPet;
+
 
 
     @BeforeEach
@@ -115,7 +113,7 @@ class PetResourceTest {
     }
 
     @Test
-    void whenDeleteThenReturnSuccess() {
+    void whenDeleteThenReturnNoContent() {
         doNothing().when(petService).delete(any(UUID.class));
 
         ResponseEntity<PetDTO> response = petResource.delete(ID);
@@ -129,6 +127,6 @@ class PetResourceTest {
     public void startdb() {
         pet = new Pet(ID, NAME, GENDER, WEIGHT);
         petDTO = new PetDTO(ID, NAME, GENDER, WEIGHT);
-        optionalPet = Optional.of(new Pet(ID, NAME, GENDER, WEIGHT));
+
     }
 }
