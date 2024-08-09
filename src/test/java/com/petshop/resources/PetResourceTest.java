@@ -58,6 +58,10 @@ class PetResourceTest {
         assertEquals(PetDTO.class, Objects.requireNonNull(response.getBody()).getClass());
         assertEquals(ResponseEntity.class, response.getClass());
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(ID, response.getBody().getId());
+        assertEquals(NAME, response.getBody().getName());
+        assertEquals(GENDER, response.getBody().getGender());
+        assertEquals(WEIGHT, response.getBody().getWeight());
     }
 
     @Test
@@ -84,6 +88,10 @@ class PetResourceTest {
         assertEquals(ResponseEntity.class, response.getClass());
         assertEquals(PetDTO.class, Objects.requireNonNull(response.getBody()).getFirst().getClass());
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(ID, response.getBody().getFirst().getId());
+        assertEquals(NAME, response.getBody().getFirst().getName());
+        assertEquals(GENDER, response.getBody().getFirst().getGender());
+        assertEquals(WEIGHT, response.getBody().getFirst().getWeight());
 
     }
 
@@ -97,6 +105,10 @@ class PetResourceTest {
         assertEquals(ResponseEntity.class, response.getClass());
         assertEquals(Pet.class, Objects.requireNonNull(response.getBody()).getClass());
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(ID, response.getBody().getId());
+        assertEquals(NAME, response.getBody().getName());
+        assertEquals(GENDER, response.getBody().getGender());
+        assertEquals(WEIGHT, response.getBody().getWeight());
     }
 
     @Test
@@ -110,6 +122,10 @@ class PetResourceTest {
         assertEquals(ResponseEntity.class, response.getClass());
         assertEquals(Pet.class, Objects.requireNonNull(response.getBody()).getClass());
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(ID, response.getBody().getId());
+        assertEquals(NAME, response.getBody().getName());
+        assertEquals(GENDER, response.getBody().getGender());
+        assertEquals(WEIGHT, response.getBody().getWeight());
     }
 
     @Test
